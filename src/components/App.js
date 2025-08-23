@@ -10,10 +10,6 @@ function App() {
   const addContactHandler = (contact) => {
     console.log(contact);
     setContacts((data) => [...data, contact]);
-    localStorage.setItem(
-      LOCAL_STORAGE_KEY,
-      JSON.stringify([...contacts, contact])
-    );
   };
   useEffect(() => {
     const retrieveContacts = JSON.parse(
@@ -23,10 +19,10 @@ function App() {
     if (retrieveContacts) setContacts(retrieveContacts);
   }, []);
 
-  // useEffect(() => {
-  //   console.log("set", contacts);
-
-  // }, [contacts]);
+  useEffect(() => {
+    console.log("set", contacts);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
+  }, [contacts]);
   return (
     <div className="ui container">
       <Header />
