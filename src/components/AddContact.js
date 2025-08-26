@@ -1,5 +1,4 @@
 import React from "react";
-
 class AddContact extends React.Component {
   state = {
     name: "",
@@ -7,12 +6,13 @@ class AddContact extends React.Component {
   };
   add = (e) => {
     e.preventDefault();
-    if (this.state.name == "" || this.state.email == "") {
+    if (this.state.name === "" || this.state.email === "") {
       alert("All the fields are mandatory!");
       return;
     }
     this.props.addContactHandler(this.state);
     this.setState({ name: "", email: "" });
+    console.log(this.props.history.push("/"));
   };
   render() {
     return (
