@@ -5,6 +5,7 @@ import AddContact from "./AddContact";
 import ContactList from "./ContactList";
 import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ContactDetail from "./ContactDetail";
 
 function App() {
   const LOCAL_STORAGE_KEY = "contacts";
@@ -37,13 +38,6 @@ function App() {
         <Header />
         <Switch>
           <Route
-            path="/add"
-            render={(props) => (
-              <AddContact {...props} addContactHandler={addContactHandler} />
-            )}
-          />
-
-          <Route
             path="/"
             exact
             render={(props) => (
@@ -53,6 +47,18 @@ function App() {
                 getContactId={removeContactHandler}
               />
             )}
+          />
+
+          <Route
+            path="/add"
+            render={(props) => (
+              <AddContact {...props} addContactHandler={addContactHandler} />
+            )}
+          />
+
+          <Route
+            path="/contact/:id"
+            render={(props) => <ContactDetail {...props} />}
           />
         </Switch>
       </Router>
