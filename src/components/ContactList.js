@@ -5,7 +5,7 @@ const ContactList = (props) => {
   console.log(props);
 
   const renderContactList = props.contacts.map((contact) => {
-    return <ContactCard contact={contact} />;
+    return <ContactCard contact={contact} clickHandler={props.getContactId} />;
   });
   return <div className="ui celled list">{renderContactList}</div>;
 };
