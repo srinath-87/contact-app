@@ -14,10 +14,10 @@ const ContactList = (props) => {
   });
   return (
     <div className="main">
-      <h2>
-        Contact List
-        <Link to={"/add"}>
-          <button className="ui button blue right">Add contact</button>
+      <h2 className="contact-list-header">
+        <span>Contact List</span>
+        <Link to="/add">
+          <button className="ui button blue">Add contact</button>
         </Link>
       </h2>
       <div className="ui celled list">{renderContactList}</div>

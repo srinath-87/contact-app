@@ -36,3 +36,37 @@
     transform: rotate(360deg);
   }
 }
+/* Make the list item a full-width row and pin the trash to the end */
+.contact-row {
+  display: grid !important;
+  grid-template-columns: auto 1fr auto; /* avatar | content grows | icon */
+  align-items: center;
+  column-gap: 12px;
+  width: 100%;
+}
+
+.contact-content {
+  min-width: 0;
+} /* allow text to shrink/wrap */
+.trash-icon {
+  justify-self: end;
+  cursor: pointer;
+  color: red;
+}
+
+/* IMPORTANT: remove any floats that might be lingering */
+.contact-row .right.floated {
+  float: none !important;
+}
+.contact-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* pushes button to far right */
+  width: 100%;
+}
+
+.center-div {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  margin-top: 1rem; /* optional spacing */
+}
