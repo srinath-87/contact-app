@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ContactDetail from "./ContactDetail";
 import api from "../api/contact";
+import EditContact from "./EditContact";
 
 function App() {
   // const LOCAL_STORAGE_KEY = "contacts";
@@ -21,6 +22,16 @@ function App() {
     const request = { id: uuidv4(), ...contact };
     const response = await api.post("/contacts", request);
     setContacts((data) => [...data, response.data]);
+  };
+
+  const editContactHandler = async (contact) => {
+    const response = await api.put(`/contacts/${contact.id}`, contact);
+    const { id } = response.data;
+    setContacts(
+      contacts.map((contact) => {
+        return contact.id === id ? { ...response.data } : contact;
+      })
+    );
   };
 
   const removeContactHandler = async (id) => {
@@ -69,6 +80,13 @@ function App() {
             path="/add"
             render={(props) => (
               <AddContact {...props} addContactHandler={addContactHandler} />
+            )}
+          />
+
+          <Route
+            path="/edit"
+            render={(props) => (
+              <EditContact {...props} editContactHandler={editContactHandler} />
             )}
           />
 
