@@ -3,10 +3,14 @@ import ContactCard from "./ContactCard";
 import { Link } from "react-router-dom";
 
 const ContactList = (props) => {
-  console.log(props);
-
   const renderContactList = props.contacts.map((contact) => {
-    return <ContactCard contact={contact} clickHandler={props.getContactId} />;
+    return (
+      <ContactCard
+        contact={contact}
+        clickHandler={props.getContactId}
+        key={contact.id}
+      />
+    );
   });
   return (
     <div className="main">

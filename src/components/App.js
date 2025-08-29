@@ -6,10 +6,17 @@ import ContactList from "./ContactList";
 import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ContactDetail from "./ContactDetail";
+import api from "../api/contact";
 
 function App() {
-  const LOCAL_STORAGE_KEY = "contacts";
+  // const LOCAL_STORAGE_KEY = "contacts";
   const [contacts, setContacts] = useState([]);
+
+  const retrieveContacts = async () => {
+    const response = await api.get("/contacts");
+    return response.data;
+  };
+
   const addContactHandler = (contact) => {
     console.log(contact);
     setContacts((data) => [...data, { id: uuidv4(), ...contact }]);
@@ -21,17 +28,24 @@ function App() {
   };
 
   useEffect(() => {
-    const retrieveContacts = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY)
-    );
-    console.log("get", retrieveContacts);
-    if (retrieveContacts) setContacts(retrieveContacts);
+    // const retrieveContacts = JSON.parse(
+    //   localStorage.getItem(LOCAL_STORAGE_KEY)
+    // );
+    // console.log("get", retrieveContacts);
+
+    const getAllContacts = async () => {
+      const allContacts = await retrieveContacts();
+      if (allContacts) setContacts(allContacts);
+    };
+    getAllContacts();
+
+    // if (retrieveContacts) setContacts(retrieveContacts);
   }, []);
 
-  useEffect(() => {
-    console.log("set", contacts);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   console.log("set", contacts);
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
+  // }, [contacts]);
   return (
     <div className="ui container">
       <Router>
